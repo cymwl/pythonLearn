@@ -485,7 +485,6 @@
 # line.render()
 
 
-
 """
 疫情折线图学习代码
 """
@@ -688,7 +687,6 @@
 # timeline.render("时间线测试.html")
 
 
-
 """
 多组数据时间线测试
 """
@@ -746,10 +744,11 @@
 # timeline.render("1960——2019GDP.html")
 
 
-
 """
 对象学习
 """
+
+
 # class student:
 #     name=None
 #     age=None
@@ -777,6 +776,76 @@
 # print(std1<std2)
 # std1.say()
 # print(std1)
+
+"""
+多态测试
+"""
+# class animal:
+#     def speak(self):
+#         pass
+#
+#
+# class cat(animal):
+#     def speak(self):
+#         print("mmm")
+#
+#
+# class dog(animal):
+#     def speak(self):
+#         print("www")
+#
+#
+# def make_noise(animal: animal):
+#     animal.speak()
+# cat=cat()
+# dog=dog()
+#
+#
+# make_noise(cat)
+
+
+'''
+数据库连接代码
+'''
+# from pymysql import Connection
+# conn=Connection(
+#     host='localhost',
+#     port=3306,
+#     user='root',
+#     password="145371",
+#     autocommit=True
+# )
+# # print(conn.get_server_info())
+# curor=conn.cursor()
+# conn.select_db("t1")
+# # curor.execute("create table test_pymysql(id int);")
+# curor.execute("select * from user")
+#
+# results=curor.fetchall()
+# print(results)
+# curor.execute("insert into user values(10, '王王王王', 18, 1, '17628285006')")
+# conn.close()
+
+
+'''
+spark学习
+'''
+from pyspark import SparkConf, SparkContext
+#创建SparkConf类对象
+conf=SparkConf().setMaster("local[*]").\
+    setAppName("test_spark_app")
+#基于sparkConf类对象创建SparkContext对象
+sc=SparkContext(conf=conf)
+#打印Spark的运行版本
+print(sc.version)
+#停止SparkContext对象的运行（停止Spark程序）
+sc.stop()
+
+
+
+
+
+
 
 
 
