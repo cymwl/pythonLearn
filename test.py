@@ -748,7 +748,6 @@
 对象学习
 """
 
-
 # class student:
 #     name=None
 #     age=None
@@ -830,42 +829,140 @@
 '''
 spark学习
 '''
-from pyspark import SparkConf, SparkContext
-#创建SparkConf类对象
-conf=SparkConf().setMaster("local[*]").\
-    setAppName("test_spark_app")
-#基于sparkConf类对象创建SparkContext对象
-sc=SparkContext(conf=conf)
-#打印Spark的运行版本
-print(sc.version)
-#停止SparkContext对象的运行（停止Spark程序）
-sc.stop()
+
+# 配置spark全局设置否则找不到python解释器
+# import os
+#
+# os.environ['PYSPARK_PYTHON'] = "D:/Anaconda/python.exe"
+#
+# from pyspark import SparkConf, SparkContext
+#
+# # 创建SparkConf类对象
+# conf = SparkConf().setMaster("local[*]"). \
+#     setAppName("test_spark_app")
+# # 基于sparkConf类对象创建SparkContext对象
+# sc = SparkContext(conf=conf)
+# # 打印Spark的运行版本
+# print(sc.version)
+
+# rdd1 = sc.parallelize([1, 2, 3, 4, 5])
+# def func(data):
+#     return data*10
+
+# rdd.map方法
+# rdd2 = rdd1.map(lambda x: x * 10).map(lambda x: x + 10)
+
+
+# rdd.flatmap方法
+# rdd=sc.parallelize(["a s d","qw e","zx c","rty"])
+# rdd2=rdd.flatMap(lambda x:x.split(" "))
+
+
+# rdd.reducebykey方法
+# rdd=sc.parallelize([('a',1),('a',1),('b',1),('b',1),('b',1)])
+# rdd2=rdd.reduceByKey(lambda a,b:a+b)
+
+
+# p144  统计文件中单词个数
+
+# Todo p152-153案列未看
+
+# 停止SparkContext对象的运行（停止Spark程序）
+# sc.stop()
+
+
+# 闭包
+# def outer(logo):
+#     def inner(msg):
+#         print(f"<{logo}>{msg}<{logo}>")
+#     return inner
+#
+# fn1=outer("outside")
+# fn1("innner")
+
+
+# def outer(num1):
+#     def inner(num2):
+#         nonlocal num1
+#         num1+=num2
+#         print(num1)
+#     return inner
+#
+# fn1=outer(50)
+# fn1(25)
+# fn1(25)
+# fn1(25)
+# fn1(25)
+
+
+# 模拟atm
+# def bank(total,data:int):
+#     if data==1:
+#         def add(num1):
+#             nonlocal total
+#             total+=num1
+#             print(total)
+#         return add
+#     else:
+#         def jian(num1):
+#             nonlocal total
+#             total-=num1
+#             print(total)
+#         return jian
+# p1=bank(80,2)
+# p1(20)
+
+
+# 改良atm
+# def account_creat(initial_amount=0):
+#     def atm(num, deposit=True):
+#         nonlocal initial_amount
+#         if deposit == True:
+#             # nonlocal initial_amount
+#             initial_amount += num
+#             print(initial_amount)
+#         else:
+#             initial_amount -= num
+#             print(initial_amount)
+#     return atm
+#
+# one=account_creat(80)
+# one(40,True)
 
 
 
 
 
 
+# 网络编程学习
+import socket
 
+# new socket()
+socket_server = socket.socket()
 
+# bind ip and address
+socket_server.bind(("localhost", 8888))
 
+# 监听端口
+# 1表示接受的链接数量
+socket_server.listen(1)
 
+# 接受客服端连接，获得连接对象
+# accept方法返回的是二元元组（链接对象，客户端地址信息）
+# 可以通过变量1，变量2=socket.accept的形式接受
+conn, address = socket_server.accept()
+print(f"接收到了客服端的链接，客户端的信息是：{address}")
 
+# 接受客户端信息
+# recv接受的参数是缓冲器大小，一般1024即可，同时返回的是bytes对象，不是字符串，可以通过UTF——8转换成字符串对象
 
+data: str = conn.recv(1024).decode("UTF-8")
 
+print(f"客服端发来的消息是：{data}")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# 发送回复消息
+msg = input("请输入你要和客户端回复的消息：").encode("UTF-8")
+conn.send(msg)
+# close
+conn.close()
+socket_server.close()
