@@ -934,6 +934,7 @@ spark学习
 
 
 
+
 # 网络编程学习
 import socket
 
@@ -964,6 +965,7 @@ print(f"客服端发来的消息是：{data}")
 msg = input("请输入你要和客户端回复的消息：").encode("UTF-8")
 conn.send(msg)
 # close
+
 conn.close()
 socket_server.close()
 
