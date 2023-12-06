@@ -936,38 +936,38 @@ spark学习
 
 
 # 网络编程学习
-import socket
-
-# new socket()
-socket_server = socket.socket()
-
-# bind ip and address
-socket_server.bind(("localhost", 8888))
-
-# 监听端口
-# 1表示接受的链接数量
-socket_server.listen(1)
-
-# 接受客服端连接，获得连接对象
-# accept方法返回的是二元元组（链接对象，客户端地址信息）
-# 可以通过变量1，变量2=socket.accept的形式接受
-conn, address = socket_server.accept()
-print(f"接收到了客服端的链接，客户端的信息是：{address}")
-
-# 接受客户端信息
-# recv接受的参数是缓冲器大小，一般1024即可，同时返回的是bytes对象，不是字符串，可以通过UTF——8转换成字符串对象
-
-data: str = conn.recv(1024).decode("UTF-8")
-
-print(f"客服端发来的消息是：{data}")
-
-# 发送回复消息
-msg = input("请输入你要和客户端回复的消息：").encode("UTF-8")
-conn.send(msg)
-# close
-
-conn.close()
-socket_server.close()
+# import socket
+#
+# # new socket()
+# socket_server = socket.socket()
+#
+# # bind ip and address
+# socket_server.bind(("localhost", 8888))
+#
+# # 监听端口
+# # 1表示接受的链接数量
+# socket_server.listen(1)
+#
+# # 接受客服端连接，获得连接对象
+# # accept方法返回的是二元元组（链接对象，客户端地址信息）
+# # 可以通过变量1，变量2=socket.accept的形式接受
+# conn, address = socket_server.accept()
+# print(f"接收到了客服端的链接，客户端的信息是：{address}")
+#
+# # 接受客户端信息
+# # recv接受的参数是缓冲器大小，一般1024即可，同时返回的是bytes对象，不是字符串，可以通过UTF——8转换成字符串对象
+#
+# data: str = conn.recv(1024).decode("UTF-8")
+#
+# print(f"客服端发来的消息是：{data}")
+#
+# # 发送回复消息
+# msg = input("请输入你要和客户端回复的消息：").encode("UTF-8")
+# conn.send(msg)
+# # close
+#
+# conn.close()
+# socket_server.close()
 ####
 
 
